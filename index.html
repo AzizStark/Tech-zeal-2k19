@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<head>
+    <title>TECH-ZEAL</title>
+    <link rel="stylesheet" href="./style.css">
+    <style>
+        html {
+            height: 100%;
+            background: radial-gradient(ellipse at bottom, #020113 0%, #021f18 100%);
+            
+        }
+
+        @font-face {
+            font-family: MuseoSans;
+            src: url("MuseoSansBlack.woff") format('woff');
+
+        }
+
+        h2,
+        h1 {
+            position: relative;
+            text-align: center;
+            color: rgb(246, 250, 249);
+            text-shadow: 0px 0px 3px rgba(134, 152, 255, 0.38), 0px 0px 9px rgba(7, 255, 67, 0.55);
+            letter-spacing: 0.30em;
+        }
+
+        body {
+            font-family: MuseoSans;
+            font-weight: 900;
+            font-size: 18px;
+        }
+
+
+
+        .fuller-button {
+            align-self: center;
+            color: rgba(255, 255, 255, 1);
+            background: none;
+            border-radius: 0;
+            padding: 1.2em;
+            letter-spacing: 0.35em;
+            font-size: 0.7em;
+            transition: background-color 0.3s, box-shadow 0.3s, color 0.3s;
+            margin: 1em;
+            cursor: default;
+            width: 10em;
+        }
+
+        .blue {
+            box-shadow: inset 0 0 1em rgba(0, 170, 170, 0.5), 0 0 1em rgba(0, 170, 170, 0.5);
+            border: #0dd solid 2px;
+        }
+
+        .blue:hover {
+            background-color: #0dd;
+            box-shadow: inset 0 0 0 rgba(0, 170, 170, 0.5), 0 0 1.5em rgba(0, 170, 170, 0.7);
+        }
+
+        .blue:active {
+            background-color: rgb(24, 129, 129);
+            box-shadow: inset 0 0 0 rgba(0, 170, 170, 0.5), 0 0 1.5em rgba(0, 170, 170, 0.7);
+        }
+
+        .red {
+            box-shadow: inset 0 0 1em rgba(251, 81, 81, 0.4), 0 0 1em rgba(251, 81, 81, 0.4);
+            border: #fb5454 solid 2px;
+        }
+
+        .red:hover {
+            background-color: #fb5454;
+            box-shadow: inset 0 0 0 rgba(251, 81, 81, 0.4), 0 0 1.5em rgba(251, 81, 81, 0.6);
+        }
+
+        .red:active {
+            background-color: #9b3131;
+            box-shadow: inset 0 0 0 rgba(251, 81, 81, 0.4), 0 0 1.5em rgba(251, 81, 81, 0.6);
+        }
+
+        .white {
+            box-shadow: inset 0 0 0.8em rgba(255, 255, 255, 0.3), 0 0 0.8em rgba(255, 255, 255, 0.3);
+            border: #fff solid 2px;
+        }
+
+        .white:hover {
+            color: rgba(0, 0, 0, 0.8);
+            background-color: #fff;
+            box-shadow: inset 0 0 0 rgba(255, 255, 255, 0.3), 0 0 1.2em rgba(255, 255, 255, 0.5);
+        }
+
+        .white:active {
+            background-color: rgb(143, 122, 122);
+            box-shadow: inset 0 0 0 rgba(255, 255, 255, 0.3), 0 0 1.2em rgba(255, 255, 255, 0.5);
+        }
+    </style>
+</head>
+
+<body>
+    <div id='stars'></div>
+    <div id='stars2'></div>
+    <div id='stars3'></div>
+    <div>
+        <h2>
+            VELAMMAL COLLEGE OF ENGINEERING AND TECHNOLOGY
+        </h2>
+        <h1 style="font-size: 3em;">
+            TECH-ZEAL 2K19
+        </h1>
+
+        <img style="display: block;
+        margin-left: auto;
+        margin-right: auto;"
+            src='https://lh3.googleusercontent.com/cHtG6qd2O7aSFmoPRjkv4zFdqxctAtF4lmKEfaXXVeRev4bHGhr5qYhuTbjtnWSydQ'
+            width="360" height="360" />
+
+        <div class="flex-grid-center" style="display: flex;
+        justify-content: center; margin-top: 60px">
+            <div class="pure-button fuller-button blue">
+                <center>REGISTER</center>
+            </div>
+            <div class="pure-button fuller-button red">
+                <center> EVENTS</center>
+            </div>
+            <div class="pure-button fuller-button white">
+                <center>MORE</center>
+            </div>
+        </div>
+        <!--form.pure-form-->
+    </div>
+
+</body>
+
+</html>
