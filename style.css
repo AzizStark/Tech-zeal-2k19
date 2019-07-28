@@ -100,6 +100,20 @@ body {
   width: 10em;
 }
 
+.fuller-button-dept {
+  align-self: center;
+  color: rgba(255, 255, 255, 1);
+  background: none;
+  border-radius: 0;
+  padding: 1.2em;
+  letter-spacing: 0.35em;
+  font-size: 0.7em;
+  transition: background-color 0.3s, box-shadow 0.3s, color 0.3s;
+  cursor: default;
+  margin: auto;
+  width: 10em;
+}
+
 .blue {
   box-shadow: inset 0 0 1em rgba(0, 170, 170, 0.5), 0 0 1em rgba(0, 170, 170, 0.5);
   border: #0dd solid 2px;
@@ -182,7 +196,7 @@ body {
   max-height: 0;
   padding: 0 1em;
   color: #ffffff;
-  background: rgba(0, 0, 0, 0.692);
+  background: rgba(129, 83, 207, 0.534);
   transition: all .35s;
   text-align: center;
 }
