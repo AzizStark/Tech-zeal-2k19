@@ -775,11 +775,12 @@ button:focus {
   bottom: 0;
   margin-bottom: auto;
   left: 0;
-  padding: 1rem;
+  padding: 0.8rem;
   background-color: #160f0f;
   text-align: center;
   color: #0dd;
-  font-size: 10px;
+  font-size: 8px;
+  font-family:  'Titillium Web', sans-serif;
 }
 
 @-moz-keyframes spin {
