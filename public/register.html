@@ -77,14 +77,14 @@
                     eventDept: eventDept
                 }, function (error) {
                     if (error) {
+                        document.getElementById('loading').className = '';
                         alert('Sorry! You couldn\'t be registered. Please try again!');
                         form.reset();
                     } else {
+                        document.getElementById('loading').className = '';
                         alert('Registration Successful!');
                         form.reset();
                     }
-                }).then(() => {
-                    document.getElementById('loading').className = '';
                 });
                 return false;
             }
