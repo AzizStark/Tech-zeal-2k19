@@ -7,6 +7,16 @@ html {
   src: url("MuseoSansBlack.woff") format("woff");
 }
 
+.home-width {
+  width: 100%;
+}
+
+@media only screen and (min-width: 768px) {
+  .home-width {
+    width: 65%;
+  }
+}
+
 h2,
 h1 {
   text-align: center;
