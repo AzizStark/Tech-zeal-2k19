@@ -66,7 +66,7 @@
 
                 var database = firebase.database();
 
-                firebase.database().ref('users/' + form["Email"].value + eventDept + eventName).set({
+                firebase.database().ref('users/' + form["Phone"].value + eventDept + eventName).set({
                     name: form["Name"].value,
                     email: form["Email"].value,
                     year: form["Year"].value,
