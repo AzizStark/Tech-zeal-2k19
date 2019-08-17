@@ -12,9 +12,16 @@
     <div id="stars" style="position: fixed;"></div>
     <div id="stars2" style="position: fixed;"></div>
     <div id="stars3" style="position: fixed;"></div>
-
+    <style>
+        .show {
+            display: block;
+        }
+        .hide {
+            display: hidden;
+        }
+    </style>
     <script>
-        var hash = location.hash.replace(/_/, ' ').substr(1);
+        var hash = decodeURIComponent(location.hash).replace(/_/g, ' ').substr(1);
         var eventName = hash.split('-')[0];
         var eventDept = hash.split('-')[1];
     </script>
@@ -40,55 +47,6 @@
 
         <!-- Initialize Firebase -->
         <script src="/__/firebase/init.js"></script>
-        <script>
-            var config = {
-                apiKey: "AIzaSyAUIgbQuHLe6WOK0FmbeOUw6azgtR3mpn0",
-                authDomain: "techzeal.firebaseapp.com",
-                databaseURL: "https://techzeal-e4bde.firebaseio.com/",
-                storageBucket: "bucket.appspot.com"
-            };
-            if (!firebase.apps.length) {
-                firebase.initializeApp(config);
-            }
-            function validateAndSubmit() {
-                var form = document.forms["register"];
-                var els = Object.values(form);
-                els.pop();
-                els.pop();
-                for (var i = 0; i < els.length; i++) {
-                    if (!els[i].value) {
-                        alert(els[i].name + ' cannot be empty!')
-                        return false;
-                    }
-                }
-
-                document.getElementById('loading').className = 'loading'
-
-                var database = firebase.database();
-
-                firebase.database().ref('users/' + form["Phone"].value + eventDept + eventName).set({
-                    name: form["Name"].value,
-                    email: form["Email"].value,
-                    year: form["Year"].value,
-                    college: form["College"].value,
-                    dept: form["Dept"].value,
-                    mobile: form["Phone"].value,
-                    eventName: eventName,
-                    eventDept: eventDept
-                }, function (error) {
-                    if (error) {
-                        document.getElementById('loading').className = '';
-                        alert('Sorry! You couldn\'t be registered. Please try again!');
-                        form.reset();
-                    } else {
-                        document.getElementById('loading').className = '';
-                        alert('Registration Successful!');
-                        form.reset();
-                    }
-                });
-                return false;
-            }
-        </script>
         <form name="register" action="" method="POST" onsubmit="return validateAndSubmit()">
             <div class="tab-content shadow" style="font-size: 85%; max-height: 80%; padding: 10PX; ">
                 <h1 class="shadow" style="padding-bottom: 8px;">
@@ -131,6 +89,11 @@
                     <input required name="College" class="effect-13" type="text" placeholder="ENTER YOUR COLLEGE NAME">
                     <span class="focus-bg"></span>
                 </div> <br /> <br />
+                <div id="hostel" style="display: none;" class="col-3">
+                    <span style="font-size: 15px">Boarding & Lodging Required:</span>&nbsp;&nbsp;
+                    <input type="checkbox" name="hostel">
+                </div>
+                <br /><br />
                 <div class="col-3">
                     <button id='submit' class="pure-button fuller-button-dept red"
                         style="float: right; font-size: 12px;" type="submit"><b>REGISTER</b></button>
@@ -143,8 +106,95 @@
             </div>
         </form>
     </div>
+    <script>
+            var HOSTELLIMIT = 20;
+            document.getElementById('hostel').style.display = 'none';
+            var config = {
+                apiKey: "AIzaSyAUIgbQuHLe6WOK0FmbeOUw6azgtR3mpn0",
+                authDomain: "techzeal.firebaseapp.com",
+                databaseURL: "https://techzeal-e4bde.firebaseio.com/",
+                storageBucket: "bucket.appspot.com"
+            };
+            if (!firebase.apps.length) {
+                firebase.initializeApp(config);
+            }
+            var database = firebase.database();
+            var db;
+            firebase.database().ref('users/').once('value', function(snap){
+                db = snap.val();
+                if(db['HOSTEL']) {
+                    var len = Object.keys(db['HOSTEL']).length;
+                    if(len < HOSTELLIMIT) {
+                      document.getElementById('hostel').style.display = 'flex';
+                    }
+                } else {
+                    document.getElementById('hostel').style.display = 'flex';
+                }
+            });
+            function validateAndSubmit() {
+                if(!db) {
+                    alert('Loading...');
+                    return false;
+                }
+                var form = document.forms["register"];
+                var els = Object.values(form);
+                els.pop();
+                els.pop();
+                els.pop();
+                for (var i = 0; i < els.length; i++) {
+                    if (!els[i].value) {
+                        alert(els[i].name + ' cannot be empty!')
+                        return false;
+                    }
+                }
+                var entries = Object.entries(db);
+                for(var i = 0; i < entries.length; i++) {
+                    var entry = entries[i];
+                    if(entry[0] == eventDept || entry[0] == 'HOSTEL') continue;
+                    var str = JSON.stringify(entry[1]).toLowerCase();
+                    if(str.indexOf(form["Email"].value.toLowerCase()) > -1 || str.indexOf(form["Phone"].value.toLowerCase()) > -1) {
+                        alert('You can only participate in ' + entry[0] + " department!");
+                        return false;
+                    }
+                }
+                if(form['hostel'].checked) {
+                    firebase.database().ref('users/HOSTEL/' + form["Email"].value).set({
+                        name: form["Name"].value,
+                        email: form["Email"].value,
+                        year: form["Year"].value,
+                        college: form["College"].value,
+                        dept: form["Dept"].value,
+                        mobile: form["Phone"].value,
+                        eventName: eventName,
+                        eventDept: eventDept
+                    });
+                }
+                document.getElementById('loading').className = 'loading';
+                firebase.database().ref('users/' + eventDept + '/' + eventName + '/' + form["Phone"].value).set({
+                    name: form["Name"].value,
+                    email: form["Email"].value,
+                    year: form["Year"].value,
+                    college: form["College"].value,
+                    dept: form["Dept"].value,
+                    mobile: form["Phone"].value,
+                    eventName: eventName,
+                    eventDept: eventDept
+                }, function (error) {
+                    if (error) {
+                        document.getElementById('loading').className = '';
+                        alert('Sorry! You couldn\'t be registered. Please try again!');
+                        form.reset();
+                    } else {
+                        document.getElementById('loading').className = '';
+                        alert('Registration Successful!');
+                        form.reset();
+                    }
+                });
+                return false;
+            }
+        </script>
 </body>
-<div class="footer " style="display: inline;"> 
+<div class="footer " style="display: inline;">
     MADE WITH <span class="love">❤️</span> BY <a  style="color: #eff0f2; text-decoration: none;" href="https://www.linkedin.com/in/theazizrahman/" >AZIZ</a>, <a  style="color: #eff0f2;text-decoration: none;" href="https://www.linkedin.com/in/amitjoki/" >AMIT</a> AND FRIENDS AT INFORMATION TECHNOLOGY
 </div>
 </html>
