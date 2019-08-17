@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>REGISTER</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./style.css">
+  <link href="https://fonts.googleapis.com/css?family=Titillium+Web:300,400,600,700&display=swap" rel="stylesheet">
+</head>
+
+<body style="padding-top: 30px;  padding-bottom: 50px;">
+  <div id="stars" style="position: fixed;"></div>
+  <div id="stars2" style="position: fixed;"></div>
+  <div id="stars3" style="position: fixed;"></div>
+
+  <script>
+    var hash = decodeURIComponent(location.hash).replace(/_/g, ' ').substr(1);
+    var eventName = hash.split('-')[0];
+    var eventDept = hash.split('-')[1];
+  </script>
+  <div id="loading" class="">Loading&#8230;</div>
+
+  <h1 class="shadow" style="font-size: 40px; margin-top: 0;">
+    GENNEXT 2K19
+  </h1>
+  <div class="home-width"
+    style="margin: auto; border: 1.8px solid #dadada; box-shadow: inset 0 0 1em rgba(0, 170, 170, 0.5), 0 0 1em rgba(0, 170, 170, 0.5);">
+    <input class='invisible' type="checkbox" id="chck1">
+
+
+    <label
+      style="display: flex;justify-content: center;padding: 1em;background: #ffffff;font-weight: bold;color: rgb(0, 0, 0);"
+      for="chck1">REGISTRATION FORM</label>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="/__/firebase/6.3.3/firebase-app.js"></script>
+
+    <script src="/__/firebase/6.3.3/firebase-database.js"></script>
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#reserved-urls -->
+
+    <!-- Initialize Firebase -->
+    <script src="/__/firebase/init.js"></script>
+    <script>
+      var config = {
+        apiKey: "AIzaSyAUIgbQuHLe6WOK0FmbeOUw6azgtR3mpn0",
+        authDomain: "techzeal.firebaseapp.com",
+        databaseURL: "https://techzeal-e4bde.firebaseio.com/",
+        storageBucket: "bucket.appspot.com"
+      };
+      if (!firebase.apps.length) {
+        firebase.initializeApp(config);
+      }
+      function validateAndSubmit() {
+        var form = document.forms["register"];
+        var els = Object.values(form);
+        els.pop();
+        els.pop();
+        var values = {}
+        for (var i = 0; i < els.length; i++) {
+          if (!els[i].value) {
+            alert(els[i].name + ' cannot be empty!')
+            return false;
+          } else {
+            values[els[i].name] = els[i].value;
+          }
+        }
+
+        document.getElementById('loading').className = 'loading'
+
+        var database = firebase.database();
+
+        firebase.database().ref('users/' + eventDept + '/' + eventName + '/' + new Date().getTime()).set(values, function (error) {
+          if (error) {
+            document.getElementById('loading').className = '';
+            alert('Sorry! You couldn\'t be registered. Please try again!');
+            form.reset();
+          } else {
+            document.getElementById('loading').className = '';
+            alert('Registration Successful!');
+            form.reset();
+          }
+        });
+        return false;
+      }
+    </script>
+    <form name="register" action="" method="POST" onsubmit="return validateAndSubmit()">
+      <h1 class="shadow">Fill "0" for the remaining member details if you don't have 2 members. </h1>
+      <div class="tab-content shadow" style="font-size: 85%; max-height: 80%; padding: 10PX; ">
+        <h1 class="shadow" style="padding-bottom: 8px;">
+          <script>document.write(eventName + ' - ' + eventDept + ' DEPARTMENT')</script>
+        </h1>
+        <h2>Member 1</h2>
+        <div class="col-3">
+          <input required name="Name 1" class="effect-13" type="text" placeholder="ENTER YOUR NAME">
+          <span class="focus-bg"></span>
+        </div> <br />
+        <div class="col-3">
+          <input required name="Email 1" class="effect-13" type="email" placeholder="ENTER YOUR EMAIL">
+          <span class="focus-bg"></span>
+        </div> </br>
+        <div class="col-3">
+          <input required name="Phone 1" class="effect-13" type="number" placeholder="ENTER YOUR PHONE NO">
+          <span class="focus-bg"></span>
+        </div> <br />
+        <div class="col-3">
+          <select name="Year 1" class="effect-13" style="padding-right: 48px;">
+            <option value="1">
+              First year
+            </option>
+            <option value="2">
+              Second year
+            </option>
+            <option value="3">
+              Third year
+            </option>
+            <option value="4">
+              Fourth year
+            </option>
+          </select>
+          <span class="focus-bg"></span>
+        </div> <br />
+        <div class="col-3">
+          <input required name="Dept 1" class="effect-13" type="text" placeholder="ENTER YOUR DEPARTMENT">
+          <span class="focus-bg"></span>
+        </div> </br>
+        <div class="col-3">
+          <input required name="College 1" class="effect-13" type="text" placeholder="ENTER YOUR COLLEGE NAME">
+          <span class="focus-bg"></span>
+        </div> <br /> <br />
+        <h2>Member 2</h2>
+        <div class="col-3">
+          <input required name="Name 2" class="effect-13" type="text" placeholder="ENTER YOUR NAME">
+          <span class="focus-bg"></span>
+        </div> <br />
+        <div class="col-3">
+          <input required name="Email 2" class="effect-13" type="email" placeholder="ENTER YOUR EMAIL">
+          <span class="focus-bg"></span>
+        </div> </br>
+        <div class="col-3">
+          <input required name="Phone 2" class="effect-13" type="number" placeholder="ENTER YOUR PHONE NO">
+          <span class="focus-bg"></span>
+        </div> <br />
+        <div class="col-3">
+          <select name="Year 2" class="effect-13" style="padding-right: 48px;">
+            <option value="1">
+              First year
+            </option>
+            <option value="2">
+              Second year
+            </option>
+            <option value="3">
+              Third year
+            </option>
+            <option value="4">
+              Fourth year
+            </option>
+          </select>
+          <span class="focus-bg"></span>
+        </div> <br />
+        <div class="col-3">
+          <input required name="Dept 2" class="effect-13" type="text" placeholder="ENTER YOUR DEPARTMENT">
+          <span class="focus-bg"></span>
+        </div> </br>
+        <div class="col-3">
+          <input required name="College 2" class="effect-13" type="text" placeholder="ENTER YOUR COLLEGE NAME">
+          <span class="focus-bg"></span>
+        </div> <br /> <br />
+        <div class="col-3">
+          <button id='submit' class="pure-button fuller-button-dept red" style="float: right; font-size: 12px;"
+            type="submit"><b>REGISTER</b></button>
+        </div>
+        <div class="col-3">
+          <button id='back' onclick="window.history.back()"
+            style="margin-top: 14px; margin-bottom:18px; font-size: 12px;"
+            class="pure-button fuller-button-dept white"><b>BACK</b></button>
+        </div>
+      </div>
+    </form>
+  </div>
+</body>
+<div class="footer ">DESIGNED AND DEVELOPED BY DEPARTMENT OF INFORMATION TECHNOLOGY</div>
+
+</html>
